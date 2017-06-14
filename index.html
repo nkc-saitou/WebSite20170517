@@ -1,13 +1,35 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ほほ</title>
-</head>
-<body>
-<img src = "img/dummy.jpg">
-  <h1>こんにちは世界</h1>
-  <p>こんにちはこんにちは</p>
-</body>
-</html>
+<div id="doc" class="markdown-body container-fluid"><h1 id="「-battle-on-earth-」-ゲーム紹介">「 Battle on Earth 」 ゲーム紹介</h1><p><img src="https://i.imgur.com/OOXRzSl.png" alt=""></p><p>『 Battle on Earth 』は街を壊すモンスター側と街を守る勇者側に分かれて戦う、対戦タワーディフェンス/オフェンスゲームです。</p><h2 id="「battle-on-earth」概要">「Battle on Earth」概要</h2><p>プラットフォーム：Android<br>
+開発環境：Unity C#<br>
+製作期間：約270時間<br>
+製作人数：1人</p><h2 id="「battole-on-earth」の遊び方">「Battole on Earth」の遊び方</h2><p><img src="https://i.imgur.com/IBTl9hu.png" alt=""></p><p>スマートフォンを縦で持ち、勇者側とモンスター側に分かれて戦います。</p><h3 id="勇者側">勇者側</h3><p><img src="https://i.imgur.com/AaYgGw1.png" alt=""></p><p>勇者側は両脇にある矢印を押すことでレーンごとに移動でき、迫りくるモンスターをぶっ飛ばすことが出来ます。</p><ul>
+<li>勝利条件はモンスター側がモンスターを出せなくなるまで街を守り切ることです。</li>
+</ul><h3 id="モンスター側">モンスター側</h3><p><img src="https://i.imgur.com/Rc6WrAY.png" alt=""></p><p>下のモンスターを選択し、レーンをタップすることでそのレーンに選択したモンスターが出現します。出現したモンスターはまっすぐに街へと向かっていきます。</p><ul>
+<li>勝利条件は左上の数字が０になる前に勇者が守っている街を壊すことです。</li>
+</ul><h2 id="苦労したところ">苦労したところ</h2><h3 id="マルチタップ対応">マルチタップ対応</h3><p>１台のスマホで対戦ゲームをする、ということでこのとき初めてマルチタップ対応させました。<br>
+実装までに色々なサイトをしらみつぶしに調べたり人に聞いたり…、と色々と苦労した記憶があります…。</p><p>主にこちらのサイトを参考させていただきました<br>
+→ <a href="http://tasogare-games.hatenablog.jp/entry/20150608/1433747284" target="_blank">http://tasogare-games.hatenablog.jp/entry/20150608/1433747284</a></p><pre><code class="C# hljs"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
+</span>{
+    <span class="hljs-comment">//タッチ入力対応かどうか</span>
+    <span class="hljs-keyword">if</span>(Input.touchSupported)
+    {
+        <span class="hljs-keyword">foreach</span>(Touch t <span class="hljs-keyword">in</span> Input.touches)
+        {
+            <span class="hljs-comment">//タッチの状態</span>
+            swich(t.phase)
+            {
+                <span class="hljs-comment">//タッチした</span>
+                <span class="hljs-keyword">case</span> TocuhPhase.Begin:
+                   <span class="hljs-keyword">break</span>;
+                   
+                <span class="hljs-comment">//タッチされている</span>
+                <span class="hljs-keyword">case</span> TouchPhase.Move:
+                   <span class="hljs-keyword">break</span>;
+                   
+                <span class="hljs-comment">//タッチが離された </span>
+                <span class="hljs-keyword">case</span> TouchPhase.Ended:
+                   <span class="hljs-keyword">break</span>;
+            }
+        }
+    }
+}
+</code></pre><p>あとは呼び出すメソッドにｔを引数で渡してやればt.fingerIdでタッチしている指のIdを取得することが出来ます。</p><p>また、if(Input.touchSupported)　でタッチ入力対応かどうかを先に調べておくことで、いちいちＰＣと実機用で処理を書き換える必要も無くなります。</p></div>
